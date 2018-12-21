@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static FeedbackAppV3._0.Crypto;
 
@@ -19,7 +12,7 @@ namespace FeedbackAppV3._0
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnTestEncryption_Click(object sender, EventArgs e)
         {
             var original = "Here is some data to encrypt";
 
@@ -36,11 +29,12 @@ namespace FeedbackAppV3._0
                 MessageBox.Show(@"Original: " + original);
                 var message = "";
                 var keyMessage = "";
-                var IVMessage= "";
+                var IVMessage = "";
                 foreach (var character in encrypted)
                 {
                     message += character;
                 }
+
                 foreach (var keyPart in myRijndael.Key)
                 {
                     keyMessage += keyPart;
@@ -50,12 +44,17 @@ namespace FeedbackAppV3._0
                 {
                     IVMessage += IVPart;
                 }
+
                 MessageBox.Show(@"Key: " + keyMessage);
                 MessageBox.Show(@"IV: " + IVMessage);
                 MessageBox.Show(@"Encrypted Message: " + message);
                 MessageBox.Show(@"Round Trip: " + roundTrip);
-
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
