@@ -52,7 +52,7 @@ namespace FeedbackAppV3._0
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void btnTestDB_Click(object sender, EventArgs e)
         {
 
         }
