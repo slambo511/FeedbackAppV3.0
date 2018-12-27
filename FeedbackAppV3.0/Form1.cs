@@ -3,14 +3,11 @@ using System.Configuration;
 using System.Data;
 using System.Data.Sql;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.Win32;
 using static FeedbackAppV3._0.Crypto;
-using Configuration = Microsoft.SqlServer.Management.Smo.Configuration;
 
 namespace FeedbackAppV3._0
 {
@@ -38,7 +35,7 @@ namespace FeedbackAppV3._0
                 MessageBox.Show(@"Original: " + original);
                 var message = "";
                 var keyMessage = "";
-                var IVMessage = "";
+                var ivMessage = "";
                 foreach (var character in encrypted)
                 {
                     message += character;
@@ -49,13 +46,13 @@ namespace FeedbackAppV3._0
                     keyMessage += keyPart;
                 }
 
-                foreach (var IVPart in myRijndael.IV)
+                foreach (var ivPart in myRijndael.IV)
                 {
-                    IVMessage += IVPart;
+                    ivMessage += ivPart;
                 }
 
                 MessageBox.Show(@"Key: " + keyMessage);
-                MessageBox.Show(@"IV: " + IVMessage);
+                MessageBox.Show(@"IV: " + ivMessage);
                 MessageBox.Show(@"Encrypted Message: " + message);
                 MessageBox.Show(@"Round Trip: " + roundTrip);
             }
@@ -63,7 +60,7 @@ namespace FeedbackAppV3._0
 
         private void btnTestDB_Click(object sender, EventArgs e)
         {
-            FindSQLServers();
+            FindSqlServers();
         }
 
         private void btnTestDBExists_Click(object sender, EventArgs e)
@@ -126,7 +123,7 @@ namespace FeedbackAppV3._0
             
         }
 
-        private void FindSQLServers()
+        private void FindSqlServers()
         {
             // Get remote SQL Server instances
             var dt = SqlDataSourceEnumerator.Instance.GetDataSources();
