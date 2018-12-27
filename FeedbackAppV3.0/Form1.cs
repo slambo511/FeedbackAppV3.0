@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region UsingDirectives
+
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.Sql;
@@ -9,14 +11,23 @@ using Microsoft.SqlServer.Management.Smo;
 using Microsoft.Win32;
 using static FeedbackAppV3._0.Crypto;
 
+#endregion UsingDirectives
+
 namespace FeedbackAppV3._0
 {
     public partial class Form1 : Form
     {
+
+        #region Form Initialiser
+
         public Form1()
         {
             InitializeComponent();
         }
+
+#endregion Form Initialiser 
+
+        #region Test Encryption
 
         private void btnTestEncryption_Click(object sender, EventArgs e)
         {
@@ -58,10 +69,18 @@ namespace FeedbackAppV3._0
             }
         }
 
+        #endregion Test Encryption
+
+        #region testDB Button Handler
+
         private void btnTestDB_Click(object sender, EventArgs e)
         {
             FindSqlServers();
         }
+
+        #endregion testDB Button Handler
+
+        #region btnTestDBExists Button Handler
 
         private void btnTestDBExists_Click(object sender, EventArgs e)
         {
@@ -77,6 +96,10 @@ namespace FeedbackAppV3._0
             MessageBox.Show(check ? @"Table exists." : @"Table does not exist.");
         }
 
+        #endregion btnTestDBExists Button Handler
+
+        #region btnChooseThisServer Button Handler
+
         private void btnChooseThisServer_Click(object sender, EventArgs e)
         {
             // add chosen SQL Server instance to app.config.
@@ -86,7 +109,7 @@ namespace FeedbackAppV3._0
             //config.AppSettings.Settings["SQLServerInstance"].Value = cboIntances.Text;
             //config.Save();
 
-            if (!CheckSQLExists()) return;
+            if (!CheckSqlExists()) return;
             var filePath = Path.GetFullPath("settings.app.config");
 
             var map = new ExeConfigurationFileMap {ExeConfigFilename = filePath};
@@ -118,10 +141,18 @@ namespace FeedbackAppV3._0
             }
         }
 
+        #endregion btnChooseThisServer Button Handler
+
+        #region Form Load Handler
+
         private void Form1_Load(object sender, EventArgs e)
         {
             
         }
+
+        #endregion Form Load Handler
+
+        #region Subroutine FindSqlServers Handler
 
         private void FindSqlServers()
         {
@@ -162,7 +193,11 @@ namespace FeedbackAppV3._0
 
         }
 
-        private bool CheckSQLExists()
+        #endregion Subroutine FindSqlServers Handler
+
+        #region Function (bool)CheckSqlExists Handler
+
+        private bool CheckSqlExists()
         {
             // Check key exists in settings.app.config
             var s = ConfigurationManager.AppSettings["SqlServer"];
@@ -177,5 +212,8 @@ namespace FeedbackAppV3._0
                 return false;
             }
         }
+
+        #endregion Function (bool)CheckSqlExists Handler
+
     }
 }
