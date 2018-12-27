@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Data;
+using System.Data.Sql;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using Microsoft.SqlServer.Management.Smo;
+using Microsoft.Win32;
 using static FeedbackAppV3._0.Crypto;
 
 namespace FeedbackAppV3._0
@@ -54,6 +58,40 @@ namespace FeedbackAppV3._0
 
         private void btnTestDB_Click(object sender, EventArgs e)
         {
+            var server = new Server("DESKTOP-T74VM4I");
+
+            // Get remote SQL Server instances
+            var dt = SqlDataSourceEnumerator.Instance.GetDataSources();
+            foreach (DataRow dr in dt.Rows)
+            {
+                cboIntances.Items.Add(string.Concat(dr["ServerName"], @"\", dr["InstanceName"]));
+            }
+
+            // Get local SQL serve instances, including default one which appears as blank normally
+            var registryViewArray = new[] {RegistryView.Registry32, RegistryView.Registry64};
+            foreach (var registryView in registryViewArray)
+            {
+                using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView))
+                using (var key = hklm.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server"))
+                {
+                    var instances = (string[]) key?.GetValue("InstalledInstances");
+                    if (instances != null)
+                    {
+                        foreach (var element in instances)
+                        {
+                            if (element == "MSSQLSERVER")
+                                cboIntances.Items.Add(Environment.MachineName);
+                            else
+                                cboIntances.Items.Add(Environment.MachineName + @"\\" + element);
+                        }
+                    }
+                }
+            }
+
+            foreach (Database db in server.Databases)
+                {
+                    cboTables.Items.Add(db.Name);
+                }
 
         }
     }

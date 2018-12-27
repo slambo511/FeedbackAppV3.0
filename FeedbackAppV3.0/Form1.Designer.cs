@@ -30,6 +30,8 @@
         {
             this.btnTestEncryption = new System.Windows.Forms.Button();
             this.btnTestDB = new System.Windows.Forms.Button();
+            this.cboIntances = new System.Windows.Forms.ComboBox();
+            this.cboTables = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnTestEncryption
@@ -52,11 +54,29 @@
             this.btnTestDB.UseVisualStyleBackColor = true;
             this.btnTestDB.Click += new System.EventHandler(this.btnTestDB_Click);
             // 
+            // cboIntances
+            // 
+            this.cboIntances.FormattingEnabled = true;
+            this.cboIntances.Location = new System.Drawing.Point(215, 14);
+            this.cboIntances.Name = "cboIntances";
+            this.cboIntances.Size = new System.Drawing.Size(177, 21);
+            this.cboIntances.TabIndex = 2;
+            // 
+            // cboTables
+            // 
+            this.cboTables.FormattingEnabled = true;
+            this.cboTables.Location = new System.Drawing.Point(215, 57);
+            this.cboTables.Name = "cboTables";
+            this.cboTables.Size = new System.Drawing.Size(177, 21);
+            this.cboTables.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cboTables);
+            this.Controls.Add(this.cboIntances);
             this.Controls.Add(this.btnTestDB);
             this.Controls.Add(this.btnTestEncryption);
             this.Name = "Form1";
@@ -69,6 +89,8 @@
 
         private System.Windows.Forms.Button btnTestEncryption;
         private System.Windows.Forms.Button btnTestDB;
+        private System.Windows.Forms.ComboBox cboIntances;
+        private System.Windows.Forms.ComboBox cboTables;
     }
 }
 
