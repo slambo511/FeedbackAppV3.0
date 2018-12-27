@@ -133,8 +133,7 @@ namespace FeedbackAppV3._0
 
                 // Add an Application Setting if not exist
 
-                config.AppSettings.Settings.Add("key1", "value1");
-                config.AppSettings.Settings.Add("key2", "value2");
+                config.AppSettings.Settings.Add("SQLServer", cboIntances.Text);
 
                 // Save the changes in App.config file.
                 config.Save(ConfigurationSaveMode.Modified);
@@ -151,6 +150,20 @@ namespace FeedbackAppV3._0
                     return;
                 }
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Check key exists in settings.app.config
+            var s = ConfigurationManager.AppSettings["SqlServerVersion"];
+            if (!string.IsNullOrEmpty(s))
+            {
+                // Key Exists
+            }
+            else
+            {
+                // Key does not exist
             }
         }
     }
