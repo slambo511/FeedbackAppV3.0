@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.Sql;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -116,11 +117,41 @@ namespace FeedbackAppV3._0
         private void btnChooseThisServer_Click(object sender, EventArgs e)
         {
             // add chosen SQL Server instance to app.config.
-            if (cboIntances.Text == null) return;
-            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            MessageBox.Show(@"Saving " + cboIntances.Text + @" to app.config.");
-            config.AppSettings.Settings["SQLServerInstance"].Value = cboIntances.Text;
-            config.Save();
+            //if (cboIntances.Text == null) return;
+            //var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            //MessageBox.Show(@"Saving " + cboIntances.Text + @" to app.config.");
+            //config.AppSettings.Settings["SQLServerInstance"].Value = cboIntances.Text;
+            //config.Save();
+
+            var filePath = System.IO.Path.GetFullPath("settings.app.config");
+
+            var map = new ExeConfigurationFileMap { ExeConfigFilename = filePath };
+            try
+            {
+                // Open App.Config of executable
+                var config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+
+                // Add an Application Setting if not exist
+
+                config.AppSettings.Settings.Add("key1", "value1");
+                config.AppSettings.Settings.Add("key2", "value2");
+
+                // Save the changes in App.config file.
+                config.Save(ConfigurationSaveMode.Modified);
+
+                // Force a reload of a changed section.
+                ConfigurationManager.RefreshSection("appSettings");
+                MessageBox.Show(@"Added");
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                if (ex.BareMessage == "Root element is missing.")
+                {
+                    File.Delete(filePath);
+                    return;
+                }
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
