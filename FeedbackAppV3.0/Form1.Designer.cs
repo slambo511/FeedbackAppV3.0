@@ -32,6 +32,7 @@
             this.btnTestDB = new System.Windows.Forms.Button();
             this.cboIntances = new System.Windows.Forms.ComboBox();
             this.cboTables = new System.Windows.Forms.ComboBox();
+            this.btnTestDBExists = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestEncryption
@@ -70,11 +71,22 @@
             this.cboTables.Size = new System.Drawing.Size(177, 21);
             this.cboTables.TabIndex = 3;
             // 
+            // btnTestDBExists
+            // 
+            this.btnTestDBExists.Location = new System.Drawing.Point(12, 98);
+            this.btnTestDBExists.Name = "btnTestDBExists";
+            this.btnTestDBExists.Size = new System.Drawing.Size(183, 23);
+            this.btnTestDBExists.TabIndex = 4;
+            this.btnTestDBExists.Text = "Check DB Exists";
+            this.btnTestDBExists.UseVisualStyleBackColor = true;
+            this.btnTestDBExists.Click += new System.EventHandler(this.btnTestDBExists_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnTestDBExists);
             this.Controls.Add(this.cboTables);
             this.Controls.Add(this.cboIntances);
             this.Controls.Add(this.btnTestDB);
@@ -91,6 +103,7 @@
         private System.Windows.Forms.Button btnTestDB;
         private System.Windows.Forms.ComboBox cboIntances;
         private System.Windows.Forms.ComboBox cboTables;
+        private System.Windows.Forms.Button btnTestDBExists;
     }
 }
 

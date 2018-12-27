@@ -58,8 +58,6 @@ namespace FeedbackAppV3._0
 
         private void btnTestDB_Click(object sender, EventArgs e)
         {
-            var server = new Server("DESKTOP-T74VM4I");
-
             // Get remote SQL Server instances
             var dt = SqlDataSourceEnumerator.Instance.GetDataSources();
             foreach (DataRow dr in dt.Rows)
@@ -88,11 +86,27 @@ namespace FeedbackAppV3._0
                 }
             }
 
+            var server = new Server(cboIntances.Items[0].ToString());
+
             foreach (Database db in server.Databases)
                 {
                     cboTables.Items.Add(db.Name);
                 }
 
+        }
+
+        private void btnTestDBExists_Click(object sender, EventArgs e)
+        {
+            var check = false;
+            foreach (var listItem in cboTables.Items)
+            {
+                if (listItem.ToString() == "feedbackDB")
+                {
+                    check = true;
+                }
+            }
+
+            MessageBox.Show(check ? @"Table exists." : @"Table does not exist.");
         }
     }
 }
