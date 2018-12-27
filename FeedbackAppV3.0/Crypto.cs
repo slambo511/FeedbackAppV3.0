@@ -1,11 +1,16 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.IO;
 using System.Security.Cryptography;
 
+#endregion Using Directives
+
 namespace FeedbackAppV3._0
 {
-    class Crypto
+    internal class Crypto
     {
+        #region Function (byte[])EncryptStringToBytes Handler
 
         public static byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
         {
@@ -50,6 +55,10 @@ namespace FeedbackAppV3._0
 
         }
 
+        #endregion Function (byte[])EncryptStringToBytes Handler
+
+        #region Function (string)DecryptStringFromBytes Handler
+
         public static string DecryptStringFromBytes(byte[] cipherText, byte[] Key, byte[] IV)
         {
             if (cipherText == null || cipherText.Length <= 0)
@@ -90,6 +99,8 @@ namespace FeedbackAppV3._0
 
             return plainText;
         }
+
+        #endregion Function (string)DecryptStringFromBytes Handler
 
     }
 }
