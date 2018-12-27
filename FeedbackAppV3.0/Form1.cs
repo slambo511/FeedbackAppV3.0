@@ -123,7 +123,7 @@ namespace FeedbackAppV3._0
             //config.AppSettings.Settings["SQLServerInstance"].Value = cboIntances.Text;
             //config.Save();
 
-            var filePath = System.IO.Path.GetFullPath("settings.app.config");
+            var filePath = Path.GetFullPath("settings.app.config");
 
             var map = new ExeConfigurationFileMap { ExeConfigFilename = filePath };
             try
