@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.Sql;
+using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.Win32;
 using static FeedbackAppV3._0.Crypto;
+using Configuration = Microsoft.SqlServer.Management.Smo.Configuration;
 
 namespace FeedbackAppV3._0
 {
@@ -107,6 +111,16 @@ namespace FeedbackAppV3._0
             }
 
             MessageBox.Show(check ? @"Table exists." : @"Table does not exist.");
+        }
+
+        private void btnChooseThisServer_Click(object sender, EventArgs e)
+        {
+            // add chosen SQL Server instance to app.config.
+            if (cboIntances.Text == null) return;
+            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            MessageBox.Show(@"Saving " + cboIntances.Text + @" to app.config.");
+            config.AppSettings.Settings["SQLServerInstance"].Value = cboIntances.Text;
+            config.Save();
         }
     }
 }

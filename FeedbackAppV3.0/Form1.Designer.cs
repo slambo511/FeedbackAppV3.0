@@ -33,6 +33,7 @@
             this.cboIntances = new System.Windows.Forms.ComboBox();
             this.cboTables = new System.Windows.Forms.ComboBox();
             this.btnTestDBExists = new System.Windows.Forms.Button();
+            this.btnChooseThisServer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestEncryption
@@ -81,11 +82,22 @@
             this.btnTestDBExists.UseVisualStyleBackColor = true;
             this.btnTestDBExists.Click += new System.EventHandler(this.btnTestDBExists_Click);
             // 
+            // btnChooseThisServer
+            // 
+            this.btnChooseThisServer.Location = new System.Drawing.Point(418, 12);
+            this.btnChooseThisServer.Name = "btnChooseThisServer";
+            this.btnChooseThisServer.Size = new System.Drawing.Size(147, 23);
+            this.btnChooseThisServer.TabIndex = 5;
+            this.btnChooseThisServer.Text = "Choose this server";
+            this.btnChooseThisServer.UseVisualStyleBackColor = true;
+            this.btnChooseThisServer.Click += new System.EventHandler(this.btnChooseThisServer_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnChooseThisServer);
             this.Controls.Add(this.btnTestDBExists);
             this.Controls.Add(this.cboTables);
             this.Controls.Add(this.cboIntances);
@@ -104,6 +116,7 @@
         private System.Windows.Forms.ComboBox cboIntances;
         private System.Windows.Forms.ComboBox cboTables;
         private System.Windows.Forms.Button btnTestDBExists;
+        private System.Windows.Forms.Button btnChooseThisServer;
     }
 }
 
